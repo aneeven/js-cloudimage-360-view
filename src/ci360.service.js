@@ -794,6 +794,7 @@ class CI360Viewer {
     if (!image) return;
 
     const ctx = this.canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false
     ctx.scale(this.devicePixelRatio, this.devicePixelRatio);
 
     this.updateContainerAndCanvasSize(image);
@@ -843,7 +844,7 @@ class CI360Viewer {
 
     const pointX = 0 - ((position.x / imageWidth) * (width - this.canvas.width));
     const pointY = 0 - ((position.y / imageHeight) * (height - this.canvas.height));
-
+    ctx.imageSmoothingEnabled = false
     ctx.drawImage(image, pointX, pointY, width, height);
   }
 
@@ -861,6 +862,7 @@ class CI360Viewer {
     this.add360ViewIcon();
 
     const ctx = this.canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false
     ctx.scale(this.devicePixelRatio, this.devicePixelRatio);
     this.updateContainerAndCanvasSize(image);
 
@@ -1352,10 +1354,10 @@ class CI360Viewer {
       }
 
 
-    if (hotspotsConfigs && !this.fullscreenView) {
-      this.hotspotsConfigs = generateHotspotsConfigs(hotspotsConfigs);
-      createHotspots(container, this.hotspotsConfigs);
-    }
+      if (hotspotsConfigs && !this.fullscreenView) {
+        this.hotspotsConfigs = generateHotspotsConfigs(hotspotsConfigs);
+        createHotspots(container, this.hotspotsConfigs);
+      }
 
       return this.onAllImagesLoaded();
     }
